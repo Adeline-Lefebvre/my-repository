@@ -16,9 +16,9 @@ mongoose.connect(process.env.MONGODB_URI, {
 });
 
 cloudinary.config({
-  cloud_name: "didine",
-  api_key: "773545984858169",
-  api_secret: "4FTdLtxTMcGWkJwZPHiDah_s9zU",
+  cloud_name: CLOUDINARY_CLOUD_NAME,
+  api_key: CLOUDINARY_API_KEY,
+  api_secret: CLOUDINARY_API_SECRET,
 });
 
 const userRoutes = require("./routes/user");
