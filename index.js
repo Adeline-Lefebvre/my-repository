@@ -9,16 +9,20 @@ const app = express();
 app.use(formidable());
 app.use(cors());
 
-mongoose.connect(process.env.MONGODB_URI, {
+// process.env.MONGODB_URI
+
+mongoose.connect("mongodb://localhost:27017/vinted", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
 });
-
+//  CLOUDINARY_CLOUD_NAME
+// CLOUDINARY_API_KEY
+// CLOUDINARY_API_SECRET
 cloudinary.config({
-  cloud_name: CLOUDINARY_CLOUD_NAME,
-  api_key: CLOUDINARY_API_KEY,
-  api_secret: CLOUDINARY_API_SECRET,
+  cloud_name: "didine",
+  api_key: 773545984858169,
+  api_secret: "4FTdLtxTMcGWkJwZPHiDah_s9zU",
 });
 
 const userRoutes = require("./routes/user");
@@ -30,6 +34,6 @@ app.all("*", (req, res) => {
   res.status(404).json({ message: "Page not found" });
 });
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("Server has started");
 });
