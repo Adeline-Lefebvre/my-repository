@@ -9,11 +9,14 @@ const app = express();
 app.use(formidable());
 app.use(cors());
 
-mongoose.connect("mongodb://localhost/vinted", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-});
+mongoose.connect(
+  "mongodb+srv://adeline_admin:W0P5Qvg3UPagHBjZ@cluster0.1l5wx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  }
+);
 
 cloudinary.config({
   cloud_name: "didine",
@@ -30,6 +33,6 @@ app.all("*", (req, res) => {
   res.status(404).json({ message: "Page not found" });
 });
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("Server has started");
 });
