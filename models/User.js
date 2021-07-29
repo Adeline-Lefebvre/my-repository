@@ -11,7 +11,7 @@ const User = mongoose.model("User", {
       type: String,
     },
     phone: String,
-    avatar: { type: mongoose.Schema.Types.Mixed, default: {} },
+    avatar: Object,
   },
   token: String,
   hash: String,

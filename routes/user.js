@@ -35,14 +35,16 @@ router.post("/user/signup", async (req, res) => {
           salt: salt,
         });
 
-        const result = await cloudinary.uploader.upload(
-          req.files.picture.path,
-          {
-            folder: `/vinted/users/${newUser._id}`,
-          }
-        );
-
-        newUser.avatar = result;
+        if (req.files.picture) {
+          const result = await cloudinary.uploader.upload(
+            req.files.picture.path,
+            {
+              folder: `/vinted/offers/${newUser._id}`,
+            }
+          );
+          console.log(result);
+          newUser.avatar = { secure_url: result.secure_url };
+        }
 
         await newUser.save();
         res.status(200).json({
