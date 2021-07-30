@@ -17,7 +17,7 @@ router.post("/user/signup", async (req, res) => {
     } else {
       if (req.fields.username === undefined) {
         res
-          .status(400)
+          .status(409)
           .json({ message: "Le nom d'utilisateur n'est pas rensigné" });
       } else {
         const salt = uid2(16);
