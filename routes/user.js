@@ -12,7 +12,7 @@ router.post("/user/signup", async (req, res) => {
     const user = await User.findOne({ email: req.fields.email });
     if (user !== null) {
       res
-        .status(400)
+        .status(409)
         .json({ message: "Cet email est déjà associé à un compte" });
     } else {
       if (req.fields.username === undefined) {
@@ -42,7 +42,6 @@ router.post("/user/signup", async (req, res) => {
               folder: `/vinted/offers/${newUser._id}`,
             }
           );
-          console.log(result);
           newUser.avatar = { secure_url: result.secure_url };
         }
 
