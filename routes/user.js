@@ -68,7 +68,7 @@ router.post("/user/login", async (req, res) => {
       );
       if (user.hash === newHash) {
         res.status(200).json({
-          message: `Welcome back ${user.account.username} ! 😊`,
+          message: `Bienvenue ${user.account.username} ! 😊`,
           token: user.token,
         });
       } else {
