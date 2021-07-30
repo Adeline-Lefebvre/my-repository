@@ -10,16 +10,12 @@ const User = require("../models/User");
 router.post("/user/signup", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.fields.email });
-    if (user !== null) {
+    if (user) {
       res
-        .status(400)
+        .status(409)
         .json({ message: "Cet email est déjà associé à un compte" });
     } else {
-      if (req.fields.username === undefined) {
-        res
-          .status(400)
-          .json({ message: "Le nom d'utilisateur n'est pas rensigné" });
-      } else {
+      if (req.fields.email && req.fields.password && req.fields.username) {
         const salt = uid2(16);
         const hash = SHA256(req.fields.password + salt).toString(encBase64);
         const token = uid2(16);
@@ -51,9 +47,14 @@ router.post("/user/signup", async (req, res) => {
           account: newUser.account,
           token: newUser.token,
         });
+      } else {
+        res
+          .status(409)
+          .json({ message: "Tous les champs doivent être renseignés." });
       }
     }
   } catch (error) {
+    console.log(error.message);
     res.status(400).json({ message: error.message });
   }
 });
