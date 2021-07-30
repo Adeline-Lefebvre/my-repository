@@ -39,7 +39,7 @@ router.post("/user/signup", async (req, res) => {
           const result = await cloudinary.uploader.upload(
             req.files.picture.path,
             {
-              folder: `/vinted/offers/${newUser._id}`,
+              folder: `/vinted/users/${newUser._id}`,
             }
           );
           newUser.avatar = { secure_url: result.secure_url };
@@ -66,9 +66,10 @@ router.post("/user/login", async (req, res) => {
         encBase64
       );
       if (user.hash === newHash) {
-        res
-          .status(200)
-          .json({ message: `Welcome back ${user.account.username} !` });
+        res.status(200).json({
+          message: `Welcome back ${user.account.username} !`,
+          token: user.token,
+        });
       } else {
         res.status(400).json({ message: "Identifiants incorrects." });
       }
