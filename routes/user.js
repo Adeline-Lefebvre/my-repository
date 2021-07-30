@@ -70,10 +70,10 @@ router.post("/user/login", async (req, res) => {
           .status(200)
           .json({ message: `Welcome back ${user.account.username} !` });
       } else {
-        res.status(400).json({ message: "Unauthorized" });
+        res.status(400).json({ message: "Identifiants incorrects" });
       }
     } else {
-      res.status(400).json({ message: "Unauthorized" });
+      res.status(400).json({ message: "Identifiants incorrects" });
     }
   } catch (error) {
     res.status(400).json({ message: error.message });
