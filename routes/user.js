@@ -12,12 +12,12 @@ router.post("/user/signup", async (req, res) => {
     const user = await User.findOne({ email: req.fields.email });
     if (user !== null) {
       res
-        .status(409)
+        .status(400)
         .json({ message: "Cet email est déjà associé à un compte" });
     } else {
       if (req.fields.username === undefined) {
         res
-          .status(409)
+          .status(400)
           .json({ message: "Le nom d'utilisateur n'est pas rensigné" });
       } else {
         const salt = uid2(16);
