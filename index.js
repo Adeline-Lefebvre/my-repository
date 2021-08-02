@@ -7,7 +7,13 @@ const cors = require("cors");
 
 const app = express();
 app.use(formidable());
-app.use(cors());
+app.use(
+  cors(
+    (cors.CorsOptions = {
+      origin: "http://localhost:3000",
+    })
+  )
+);
 
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
