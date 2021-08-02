@@ -10,7 +10,7 @@ app.use(formidable());
 app.use(
   cors(
     (cors.CorsOptions = {
-      origin: "http://localhost:3000",
+      origin: "https://adeline-vinted-react.netlify.app/",
     })
   )
 );
