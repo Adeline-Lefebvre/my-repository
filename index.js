@@ -10,7 +10,7 @@ app.use(formidable());
 app.use(
   cors(
     (cors.CorsOptions = {
-      origin: "https://adeline-vinted-react.netlify.app/",
+      origin: "*",
     })
   )
 );
