@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+import Stripe from "stripe";
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const StripeTransaction = require("../models/StripeTransaction");
