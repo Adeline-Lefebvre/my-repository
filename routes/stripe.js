@@ -8,10 +8,10 @@ router.post("/payment", async (req, res) => {
   console.log("Hello");
   try {
     const response = await stripe.charges.create({
-      amount: req.fields.price * 100, // en centimes
+      amount: req.fields.price * 100,
       currency: "eur",
-      description: "La description du produit...",
-      source: req.fields.stripeToken,
+      product_name: req.fields.product_name,
+      stripeToken: req.fields.stripeToken,
     });
     console.log("La réponse de Stripe ====> ", response);
     if (response.status === "succeeded") {
