@@ -7,13 +7,7 @@ const cors = require("cors");
 
 const app = express();
 app.use(formidable());
-app.use(
-  cors(
-    (cors.CorsOptions = {
-      origin: "*",
-    })
-  )
-);
+app.use(cors());
 
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
@@ -38,6 +32,6 @@ app.all("*", (req, res) => {
   res.status(404).json({ message: "Page not found" });
 });
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT || 8000, () => {
   console.log("Server has started");
 });
