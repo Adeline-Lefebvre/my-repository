@@ -5,12 +5,10 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const StripeTransaction = require("../models/StripeTransaction");
 
 router.post("/payment", async (req, res) => {
-  console.log("Hello");
   try {
     const response = await stripe.charges.create({
-      amount: req.fields.price * 100,
-      currency: "eur",
-      product_name: req.fields.product_name,
+      amount: req.fields.amount * 100,
+      product_name: req.fields.title,
       stripeToken: req.fields.stripeToken,
     });
     console.log("La réponse de Stripe ====> ", response);
