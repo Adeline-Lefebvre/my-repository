@@ -35,6 +35,7 @@ app.use(offerRoutes);
 
 app.post("/payment", async (req, res) => {
   try {
+    console.log("Hello");
     const response = await stripe.charges.create({
       amount: req.fields.price * 100, // en centimes
       currency: "eur",
