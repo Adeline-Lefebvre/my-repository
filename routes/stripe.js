@@ -2,11 +2,10 @@ const express = require("express");
 const router = express.Router();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-const Stripe = require("../models/Stripe");
+const StripeTransaction = require("../models/StripeTransaction");
 
 router.post("/payment", async (req, res) => {
   console.log("Hello");
-
   try {
     const response = await stripe.charges.create({
       amount: req.fields.price * 100, // en centimes
@@ -16,6 +15,8 @@ router.post("/payment", async (req, res) => {
     });
     console.log("La réponse de Stripe ====> ", response);
     if (response.status === "succeeded") {
+      const newTransaction = await new StripeTransaction(response);
+      await newTransaction.save();
       res.status(200).json({ message: "Paiement validé" });
     } else {
       res.status(400).json({ message: "An error occured" });
