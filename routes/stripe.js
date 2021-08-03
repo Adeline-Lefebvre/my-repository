@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const stripe = require("stripe")(
-  "sk_test_51JKJuRGGHRuiYP3jiIb69GT9yXwzcaocJAi0n9T9x1mnUeBEANTClA0gTTg8BC3odUVT9BJMD70uw08OMIWwqijC008zNVEwXM"
-);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const StripeTransaction = require("../models/StripeTransaction");
 
